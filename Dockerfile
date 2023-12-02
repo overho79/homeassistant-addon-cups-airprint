@@ -44,6 +44,11 @@ RUN useradd \
   print \
 && sed -i '/%sudo[[:space:]]/ s/ALL[[:space:]]*$/NOPASSWD:ALL/' /etc/sudoers
 
+#unzip and install brother driver (interactive process, may not work)
+RUN gunzip linux-brprinter-installer-2.2.3-1.gz
+
+RUN sudo bash linux-brprinter-installer-2.2.3-1 MFC-7840W
+
 EXPOSE 631
 
 RUN chmod a+x /run.sh
