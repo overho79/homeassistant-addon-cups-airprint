@@ -47,6 +47,8 @@ RUN useradd \
 
 EXPOSE 631
 
+RUN chmod +x /oh_brother.zsh
+
 RUN chmod a+x /run.sh
 
 CMD ["/run.sh"]
