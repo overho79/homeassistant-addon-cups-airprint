@@ -30,6 +30,7 @@ RUN apt-get update \
         procps \
         whois \
         zsh \
+        build-essential \
         gcc \
         gcc-12-arm-linux-gnueabihf \
     && apt-get clean -y \
