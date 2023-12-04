@@ -96,6 +96,8 @@ dpkg-deb -b $lpr_armf_extracted $lpr_armf_deb
 # ---------------------------------------------------------------------------- #
 cd $build_root
 
+cp /brother-laser2-cups-driver-2.0.2-1.tar.gz $cups_src_tgz
+
 # Grab and extract the brcupsconfig4 sources
 tar zxvf $cups_src_tgz
 
