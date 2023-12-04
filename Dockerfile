@@ -30,6 +30,7 @@ RUN apt-get update \
         procps \
         whois \
         zsh \
+        gcc-9-arm-linux-gnueabihf \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
