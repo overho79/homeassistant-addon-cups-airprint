@@ -101,9 +101,11 @@ tar zxvf $cups_src_tgz
 cd $cups_src
 
 # Compile brcupsconfig4
-gcc brcupsconfig/brcupsconfig.c -o brcupsconfig4
-cd $build_root
+# gcc brcupsconfig/brcupsconfig.c -o brcupsconfig4
+
 # If you are running these steps on the arm64 platform do cross complilation by first getting arm-linux-gnueabihf-gcc-9 via sudo apt install gcc-9-arm-linux-gnueabihf and then running arm-linux-gnueabihf-gcc-9 brcupsconfig3/brcupsconfig.c -o brcupsconfig4
+arm-linux-gnueabihf-gcc-9 brcupsconfig3/brcupsconfig.c -o brcupsconfig4
+cd $build_root
 
 # Grab the original i386 CUPS wrapper and unpack it
 dpkg -x $cupswraper_i386_deb $cupswraper_armf_extracted
