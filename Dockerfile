@@ -29,6 +29,7 @@ RUN apt-get update \
         bash-completion \
         procps \
         whois \
+        zsh \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
 
@@ -45,9 +46,7 @@ RUN useradd \
 && sed -i '/%sudo[[:space:]]/ s/ALL[[:space:]]*$/NOPASSWD:ALL/' /etc/sudoers
 
 #unzip and install brother driver (interactive process, may not work)
-RUN gunzip linux-brprinter-installer-2.2.3-1.gz
-
-RUN sudo bash linux-brprinter-installer-2.2.3-1 MFC-7840W
+RUN ./oh_brother.zsh MFC-7840W
 
 EXPOSE 631
 
