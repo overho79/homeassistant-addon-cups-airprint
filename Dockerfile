@@ -45,9 +45,6 @@ RUN useradd \
   print \
 && sed -i '/%sudo[[:space:]]/ s/ALL[[:space:]]*$/NOPASSWD:ALL/' /etc/sudoers
 
-#unzip and install brother driver (interactive process, may not work)
-RUN ./oh_brother.zsh MFC-7840W
-
 EXPOSE 631
 
 RUN chmod a+x /run.sh
