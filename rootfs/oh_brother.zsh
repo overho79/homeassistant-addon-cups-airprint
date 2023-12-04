@@ -74,20 +74,20 @@ cupswraper_armf_extracted=${cupswraper_i386_deb%.i386.deb}.armf.extracted
 dpkg -x $lpr_i386_deb $lpr_armf_extracted
 dpkg-deb -e $lpr_i386_deb $lpr_armf_extracted/DEBIAN
 sed -i 's/Architecture: i386/Architecture: armhf/' $lpr_armf_extracted/DEBIAN/control
-echo true > $lpr_armf_extracted/usr/local/Brother/Printer/$model_clean/inf/braddprinter
+echo true > $lpr_armf_extracted/usr/local/Brother/inf/braddprinter
 
 # Grab the Brother ARM drivers from a generic armhf archive they provide and copy the ARM code into the unpacked folders. Note that HL2270 does not use brprintconflsr3.
 generic_deb=brgenprintml2pdrv-4.0.0-1.armhf.deb
 [[ -e $generic_deb ]] || curl -LO http://download.brother.com/welcome/dlf103361/$generic_deb
 dpkg -x $generic_deb $generic_deb.extracted
-cp $generic_deb.extracted/opt/brother/Printers/BrGenPrintML2/lpd/armv7l/rawtobr3 $lpr_armf_extracted/usr/local/Brother/Printer/$model_clean/lpd
+cp $generic_deb.extracted/opt/brother/Printers/BrGenPrintML2/lpd/armv7l/rawtobr3 $lpr_armf_extracted/usr/local/Brother/lpd
 
 # Now repackage it
 cd $lpr_armf_extracted
 find . -type f ! -regex '.*.hg.*' ! -regex '.*?debian-binary.*' ! -regex '.*?DEBIAN.*' -printf '%P ' | xargs md5sum > DEBIAN/md5sums
 cd $build_root
 
-chmod 755 $lpr_armf_extracted/DEBIAN/p* $lpr_armf_extracted/usr/local/Brother/Printer/$model_clean/inf/* $lpr_armf_extracted/usr/local/Brother/Printer/$model_clean/lpd/*
+chmod 755 $lpr_armf_extracted/DEBIAN/p* $lpr_armf_extracted/usr/local/Brother/inf/* $lpr_armf_extracted/usr/local/Brother/lpd/*
 dpkg-deb -b $lpr_armf_extracted $lpr_armf_deb
 
 
@@ -111,14 +111,14 @@ dpkg-deb -e $cupswraper_i386_deb $cupswraper_armf_extracted/DEBIAN
 sed -i 's/Architecture: i386/Architecture: armhf/' $cupswraper_armf_extracted/DEBIAN/control
 
 # Copy the compiled code into the unpacked folder
-cp $cups_src/brcupsconfig4 $cupswraper_armf_extracted/usr/local/Brother/Printer/$model_clean/cupswrapper
+cp $cups_src/brcupsconfig4 $cupswraper_armf_extracted/usr/local/Brother/cupswrapper
 
 # Repack it
 cd $cupswraper_armf_extracted
 find . -type f ! -regex '.*.hg.*' ! -regex '.*?debian-binary.*' ! -regex '.*?DEBIAN.*' -printf '%P ' | xargs md5sum > DEBIAN/md5sums
 cd $build_root
 
-chmod 755 $cupswraper_armf_extracted/DEBIAN/p* $cupswraper_armf_extracted/usr/local/Brother/Printer/$model_clean/cupswrapper/*
+chmod 755 $cupswraper_armf_extracted/DEBIAN/p* $cupswraper_armf_extracted/usr/local/Brother/cupswrapper/*
 dpkg-deb -b $cupswraper_armf_extracted $cupswraper_armf_deb
 
 
